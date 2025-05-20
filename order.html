@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Complete Your Order</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>Customer Information</h1>
+  
+  <form id="orderForm" onsubmit="submitOrder(event)">
+    <label for="name">Full Name:</label><br />
+    <input type="text" id="name" required><br /><br />
+    
+    <label for="phone">Phone Number:</label><br />
+    <input type="tel" id="phone" required><br /><br />
+    
+    <label for="address">Address:</label><br />
+    <textarea id="address" rows="3" required></textarea><br /><br />
+    
+    <label for="collection">Means of Collection:</label><br />
+    <select id="collection" required>
+      <option value="">-- Select --</option>
+      <option value="Dispatch Rider">Dispatch Rider</option>
+      <option value="Pick-up">Pick-up</option>
+    </select><br /><br />
+    
+    <button type="submit">Proceed to Pay</button>
+  </form>
+
+  <script src="https://checkout.flutterwave.com/v3.js"></script>
+  <script>
+    function submitOrder(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+      const address = document.getElementById("address").value;
+      const collection = document.getElementById("collection").value;
+
+      // Store details in localStorage
+      localStorage.setItem("customerName", name);
+      localStorage.setItem("customerPhone", phone);
+      localStorage.setItem("customerAddress", address);
+      localStorage.setItem("customerCollection", collection);
+
+      // For demo: simulate total amount (or you can pass it from cart)
+      const amount = localStorage.getItem("cartTotal") || 20;
+
+      FlutterwaveCheckout({
+        public_key: "FLWPUBK_TEST-xxxxxxxxxxxxxxxxxxxxxxx-X",
+        tx_ref: Date.now(),
+        amount: amount,
+        currency: "USD",
+        payment_options: "card, mobilemoney, ussd",
+        customer: {
+          email: "customer@example.com",
+          phonenumber: phone,
+          name: name,
+        },
+        customizations: {
+          title: "Supermarket Checkout",
+          description: `Order by ${name}`,
+          logo: "https://yourdomain.com/logo.png", // Optional logo
+        },
+      });
+    }
+  </script>
+</body>
+</html>

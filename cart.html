@@ -1,0 +1,70 @@
+<!-- cart.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Shop Our Products</h1>
+    <div class="product-list">
+      <div class="product">
+        <img
+          src="productimages/denet.png"
+          alt="Milk"
+          onclick="addToCart('Milk', 5)"
+        />
+        <h2>Milk</h2>
+        <p>$5</p>
+      </div>
+      <div class="product">
+        <img
+          src="productimages/denet.png"
+          alt="Bread"
+          onclick="addToCart('Bread', 3)"
+        />
+        <h2>Bread</h2>
+        <p>$3</p>
+      </div>
+      <div class="product">
+        <img
+          src="productimages/denet.png"
+          alt="Eggs"
+          onclick="addToCart('Eggs', 4)"
+        />
+        <h2>Eggs</h2>
+        <p>$4</p>
+      </div>
+      <div class="product">
+        <img
+          src="productimages/denet.png"
+          alt="Cereal"
+          onclick="addToCart('Cereal', 6)"
+        />
+        <h2>Cereal</h2>
+        <p>$6</p>
+      </div>
+      <div class="product">
+        <img
+          src="productimages/denet.png"
+          alt="Juice"
+          onclick="addToCart('Juice', 7)"
+        />
+        <h2>Juice</h2>
+        <p>$7</p>
+      </div>
+    </div>
+
+    <div id="cart">
+      <h3>Your Cart</h3>
+      <ul id="cart-items"></ul>
+      <p>Total: $<span id="cart-total">0.00</span></p>
+      <a href="order.html">
+        <button onclick="saveCartTotal()">Pay Now</button>
+      </a>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
